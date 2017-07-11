@@ -1,0 +1,25 @@
+{
+  "name": "web-boilerplate",
+  "private": true,
+  "version": "0.0.1",
+  "description": "My personal web project boilerplate",
+  "main": "index.js",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development node ./bin/entry.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://jaraquistain@github.com/jaraquistain/web-boilerplate.git"
+  },
+  "author": "Jon Araquistain (jon@araquista.in)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jaraquistain/web-boilerplate/issues"
+  },
+  "homepage": "https://github.com/jaraquistain/web-boilerplate#readme",
+  "devDependencies": {
+    "babel-preset-env": "^1.6.0",
+    "babel-register": "^6.24.1",
+    "cross-env": "^5.0.1"
+  }
+}

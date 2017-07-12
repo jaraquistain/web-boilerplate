@@ -1,14 +1,15 @@
 #!/usr/bin/env node
-require("dotenv").config(); // Load .env file into process.env
-require("babel-register");   // Enable babel runtime transpilation
+require("dotenv").config(); // Populates process.env from .env file
+require("babel-register");  // Enables Babel runtime transpilation
 
 const config = require("../src/config").default;
-const server = require("../src/server.js");
+const server = require("../src/server").default;
 
-/** Define universal constants **/
+/** GLOBAL CONSTANTS **/
 global.__CLIENT__ = false;
 global.__SERVER__ = true;
 global.__DISABLE_SSR__ = false;
 
-server.run(config);
+/** RUN SERVER **/
+server(config);
 

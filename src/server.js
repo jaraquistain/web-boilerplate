@@ -1,17 +1,24 @@
 import Koa from "koa";
 
+import { renderView } from "./middleware";
 
-export const run = (config) => {
+export default (config) => {
+
+  // Create Koa app
   const app = new Koa();
 
-  app.use(ctx => {
-    ctx.body = "hello World";
-  });
+  // Handle View Requests
+  app.use(renderView(config));
 
+  // Start Server
   app.listen(config.port, (err) => {
-    const msg = err ? "Error starting app" : `Web serverr listening on port ${config.port}`
+    const msg = err ? "Error starting app" : `Web server listening on port ${config.port}`;
     console.log(msg);
   });
-};
 
-export default run;
+  // Handle errors
+  app.on("error", (err, ctx) => {
+    console.log("Server Error");
+    console.log(err);
+  });
+};

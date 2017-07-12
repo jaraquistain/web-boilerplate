@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.1",
   "description": "My personal web project boilerplate",
-  "main": "index.js",
+  "main": "./bin/entry.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development node ./bin/entry.js"
   },
@@ -27,6 +27,11 @@
     "dotenv": "^4.0.0"
   },
   "dependencies": {
-    "koa": "^2.3.0"
+    "koa": "^2.3.0",
+    "prop-types": "^15.5.10",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "redux": "^3.7.1",
+    "serialize-javascript": "^1.3.0"
   }
 }

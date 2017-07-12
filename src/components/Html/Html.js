@@ -1,16 +1,18 @@
 import React, { Component } from "react";
+import ReactDOMServer from "react-dom/server";
 import PropTypes from "prop-types";
 import serialize from "serialize-javascript";
 
 class Html extends Component {
   static propTypes = {
-    store: PropTypes.object.isRequired
+    store: PropTypes.object.isRequired,
+    component: PropTypes.node
   };
 
   render() {
-    const { store } = this.props;
-    const content = { __html: "<div>This is the html page</div>" };
-    const state = { __html: `window.appState=${serialize(store.getState())};` };
+    const { store, component } = this.props;
+    const content = { __html: ReactDOMServer.renderToString(component) };
+    const state = { __html: `window._appState=${serialize(store.getState())};` };
 
     return (
       <html lang="en-US">

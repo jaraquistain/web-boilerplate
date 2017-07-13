@@ -19,9 +19,7 @@ class Html extends Component {
 
     return (
       <html lang="en-US">
-        <head>
-
-        </head>
+        <head />
         <body>
           {/* Populate DOM content */}
           <div id="content" dangerouslySetInnerHTML={content} />

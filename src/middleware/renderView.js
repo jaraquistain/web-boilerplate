@@ -9,7 +9,7 @@ function generateHtml(store, component, assets) {
 }
 
 function getComponent() {
-  return <div>This is my component</div>
+  return <div>This is my component</div>;
 }
 
 export default (assets) => {

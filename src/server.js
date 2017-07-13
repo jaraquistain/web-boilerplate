@@ -1,6 +1,5 @@
 import Koa from "koa";
 import serve from "koa-static";
-import mount from "koa-mount";
 import path from "path";
 
 import { renderView } from "./middleware";
@@ -8,8 +7,7 @@ import config from "./config";
 
 /** WEB SERVER **/
 function server(webpack){
-
-  // Create Koa app
+  // Create app
   const app = new Koa();
 
   // Serve static assets

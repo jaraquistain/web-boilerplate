@@ -3,6 +3,7 @@ var path = require("path");
 const assetPath = path.resolve(__dirname, "../../static/dist");
 
 module.exports = {
+  devtool: "inline-eval-cheap-source-map",
   entry: "./src/client.js",
   output: {
     filename: "[name]-[hash].js",

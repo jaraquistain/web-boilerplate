@@ -1,7 +1,10 @@
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
 
 import reducer from "./reducer";
 
 export default (data = {}) => {
-  return createStore(reducer, data)
+  // Middleware
+  const middleware = applyMiddleware();
+
+  return createStore(reducer, data, middleware);
 }

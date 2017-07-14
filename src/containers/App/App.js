@@ -1,25 +1,27 @@
+// IMPORTS //
+// External
 import React, { Component } from "react";
-import { Link, Switch, Route } from "react-router-dom";
 
-import { Home, NotFound } from "../../containers";
+// Internal
+import { Routes, Nav } from "../../components";
 
+// UTILS //
+
+// COMPONENT //
 class App extends Component {
+  // PROP-TYPES //
+  static propTypes = {};
+
+  // RENDER //
   render() {
     return (
       <section className="app">
-        <nav>
-          <Link to="/">Home</Link><br />
-          <Link to="/a">Not Found</Link><br />
-        </nav>
-        <section>
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route component={NotFound}/>
-          </Switch>
-        </section>
+        <Nav />
+        <Routes />
       </section>
     );
   }
 }
 
+// EXPORTS //
 export default App;

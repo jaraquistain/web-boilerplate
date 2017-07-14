@@ -1,27 +1,25 @@
 // IMPORTS //
 // External
 import React, { Component } from "react";
+import Helmet from "react-helmet";
 
 // Internal
 import { Routes, Nav } from "../../components";
+import config from "../../config";
 
 // UTILS //
 
 // COMPONENT //
-class App extends Component {
-  // PROP-TYPES //
-  static propTypes = {};
+const App = () => (
+  <section className="app">
+    <Helmet {...config.app.head} />
+    <Nav />
+    <Routes />
+  </section>
+);
 
-  // RENDER //
-  render() {
-    return (
-      <section className="app">
-        <Nav />
-        <Routes />
-      </section>
-    );
-  }
-}
+// PROP-TYPES //
+App.propTypes = {};
 
 // EXPORTS //
 export default App;

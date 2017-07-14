@@ -3,6 +3,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom"
+import Helmet from "react-helmet";
 
 // Internal
 
@@ -17,6 +18,7 @@ class Home extends Component {
   render() {
     return (
       <section className="ja-page home">
+        <Helmet title="Welcome!" />
         <h1>Home</h1>
       </section>
     );

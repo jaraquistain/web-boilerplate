@@ -3,6 +3,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom"
+import Helmet from "react-helmet";
 
 // Internal
 
@@ -17,6 +18,7 @@ class NotFound extends Component {
   render() {
     return (
       <section className="ja-page not-found">
+        <Helmet title="Not Found" />
         <h1>404</h1>
       </section>
     );

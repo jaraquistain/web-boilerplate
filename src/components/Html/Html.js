@@ -1,37 +1,50 @@
+// IMPORTS //
+// External
 import React, { Component } from "react";
 import ReactDOMServer from "react-dom/server";
 import PropTypes from "prop-types";
 import serialize from "serialize-javascript";
+import Helmet from "react-helmet";
 
-class Html extends Component {
-  static propTypes = {
-    store: PropTypes.object.isRequired,
-    assets: PropTypes.shape({
-      javascript: PropTypes.object.isRequired
-    }),
-    component: PropTypes.node
-  };
+// Internal
 
-  render() {
-    const { store, component, assets: { javascript: scripts } } = this.props;
-    const content = { __html: ReactDOMServer.renderToString(component) };
-    const state = { __html: `window._appState=${serialize(store.getState())};` };
+// UTILS //
 
-    return (
-      <html lang="en-US">
-        <head />
-        <body>
-          {/* Populate DOM content */}
-          <div id="content" dangerouslySetInnerHTML={content} />
-          {/* Populate app state */}
-          <script dangerouslySetInnerHTML={state} charSet="UTF-8" />
-          {/* load main script */}
-          <script src={scripts.main} charSet="UTF-8" />
-        </body>
-      </html>
-    );
+// COMPONENT //
+const Html = ({ store, component, assets: { javascript: scripts } }) => {
+  const content = { __html: ReactDOMServer.renderToString(component) };
+  const state = { __html: `window._appState=${serialize(store.getState())};` };
+  const head = Helmet.rewind();
 
-  }
-}
+  return (
+    <html lang="en-US">
+    <head>
+      {head.base.toComponent()}
+      {head.title.toComponent()}
+      {head.meta.toComponent()}
+      {head.link.toComponent()}
+      {head.script.toComponent()}
+    </head>
+    <body>
+    {/* Populate DOM content */}
+    <div id="content" dangerouslySetInnerHTML={content} />
+    {/* Populate app state */}
+    <script dangerouslySetInnerHTML={state} charSet="UTF-8" />
+    {/* load main script */}
+    <script src={scripts.main} charSet="UTF-8" />
+    </body>
+    </html>
+  );
+};
 
+// PROP-TYPES //
+Html.propTypes = {
+  store: PropTypes.object.isRequired,
+  assets: PropTypes.shape({
+    javascript: PropTypes.object.isRequired
+  }),
+  component: PropTypes.node
+};
+
+// EXPORT
 export default Html;

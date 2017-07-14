@@ -1,12 +1,14 @@
+import path from "path";
 const DEFAULT_ENV = "development";
-const ENV = process.env.NODE_ENV || DEFAULT_ENV;
 
-/** ENV CONFIG **/
-const defaultEnvConfig = {
-  isDevelopment: true,
-  isProduction: false
+// Base configuration values
+const baseConfig = {
+  env: process.env.NODE_ENV || DEFAULT_ENV,
+  isClient: global.__CLIENT__,
+  isServer: global.__SERVER__
 };
 
+// Environment-specific values
 const envConfig = {
   "development": {
     isProduction: false,
@@ -16,18 +18,17 @@ const envConfig = {
     isProduction: false,
     isDevelopment: true,
   }
-}[ENV] || {};
+}[baseConfig.env] || {};
 
-/** CONFIG **/
-const config = {
+// Server-specific values
+const serverConfig = {
   host: process.env.HOST || "localhost",
   port: process.env.PORT || 3000,
-  isClient: global.__CLIENT__,
-  isServer: global.__SERVER__
+  favicon: process.env.FAVICON || path.join(__dirname, "..", "static", "img", "favicon.ico")
 };
 
 export default {
-  ...defaultEnvConfig,
+  ...baseConfig,
   ...envConfig,
-  ...config
+  ...(baseConfig.isServer ? serverConfig : {})
 };

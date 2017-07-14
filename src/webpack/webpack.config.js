@@ -1,4 +1,5 @@
-var path = require("path");
+const path = require("path");
+const webpack = require("webpack");
 
 const assetPath = path.resolve(__dirname, "../../static/dist");
 
@@ -19,5 +20,6 @@ module.exports = {
         use: [{ loader: 'babel-loader' }]
       }
     ]
-  }
+  },
+  plugins: []
 };

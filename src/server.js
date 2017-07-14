@@ -1,5 +1,6 @@
 import Koa from "koa";
 import serve from "koa-static";
+import favicon from "koa-favicon";
 import path from "path";
 
 import { renderView } from "./middleware";
@@ -11,6 +12,7 @@ function server(webpack){
   const app = new Koa();
 
   // Serve static assets
+  app.use(favicon(config.favicon));
   app.use(serve(path.join(__dirname, "..", "static")));
 
   // Handle View Requests

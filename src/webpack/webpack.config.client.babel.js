@@ -1,17 +1,26 @@
 import webpack from "webpack";
 import { client } from "universal-webpack/config"
+import merge from "lodash.merge";
 
 import settings from "./universal-webpack-settings"
-import configuration from "./webpack.config"
+import webpackConfig from './webpack.config'
+import appConfig from "../config";
 
-configuration.plugins = [
-  ...configuration.plugins,
-  new webpack.DefinePlugin({
-    global: {
-      __CLIENT__: true,
-      __SERVER__: false
-    }
-  })
-];
+const clientWebpackConfig = {
+  devtool: "inline-eval-cheap-source-map",
+  plugins: [
+    new webpack.DefinePlugin({
+      global: {
+        __CLIENT__: true,
+        __SERVER__: false
+      }
+    })
+  ]
+};
 
-export default client(configuration, settings)
+
+export default client(
+  merge(webpackConfig, clientWebpackConfig),
+  settings,
+  { development: appConfig.isDevelopment }
+);

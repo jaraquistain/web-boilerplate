@@ -13,7 +13,7 @@ function server(webpack){
 
   // Serve static assets
   app.use(favicon(config.favicon));
-  app.use(serve(path.join(__dirname, "..", "static")));
+  app.use(serve(config.staticPath));
 
   // Handle View Requests
   app.use(renderView(webpack.chunks()));

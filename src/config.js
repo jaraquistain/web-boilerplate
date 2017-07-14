@@ -1,9 +1,11 @@
 import path from "path";
+
 const DEFAULT_ENV = "development";
+const { NODE_ENV, HOST, PORT, FAVICON, STATIC_PATH } = process.env;
 
 // Base configuration values
 const baseConfig = {
-  env: process.env.NODE_ENV || DEFAULT_ENV,
+  env: NODE_ENV || DEFAULT_ENV,
   isClient: global.__CLIENT__,
   isServer: global.__SERVER__
 };
@@ -22,9 +24,10 @@ const envConfig = {
 
 // Server-specific values
 const serverConfig = {
-  host: process.env.HOST || "localhost",
-  port: process.env.PORT || 3000,
-  favicon: process.env.FAVICON || path.join(__dirname, "..", "static", "img", "favicon.ico")
+  host: HOST || "localhost",
+  port: PORT || 3000,
+  favicon: FAVICON || path.join(__dirname, "..", "static", "img", "favicon.ico"),
+  staticPath: STATIC_PATH || path.join(__dirname, "..", "static")
 };
 
 export default {

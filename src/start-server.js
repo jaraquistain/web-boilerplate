@@ -1,17 +1,16 @@
-/** GLOBAL CONSTANTS **/
-global.__CLIENT__ = false;
-global.__SERVER__ = true;
-
-require("dotenv").config();
-require('babel-register')({ ignore: /\/(build|node_modules)\// });
+require('babel-register')({ ignore: /\/(static|node_modules)\// });
 
 const startServer = require("universal-webpack/server");
 
+// Initialize global constants
+global.__CLIENT__ = false;
+global.__SERVER__ = true;
+
+// Load .env file into process.env
+require("dotenv").config();
+
+// Start the web server with universal-webpack
 const settings = require("./webpack/universal-webpack-settings");
 const configuration = require("./webpack/webpack.config");
-
-/**
- * This File's sole purpose is to start the web server
- */
 
 startServer(configuration, settings);

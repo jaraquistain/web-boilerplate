@@ -2,7 +2,7 @@ import path from "path";
 import merge from "lodash.merge";
 
 const DEFAULT_ENV = "development";
-const { NODE_ENV, PORT, FAVICON, STATIC_PATH } = process.env;
+const { NODE_ENV, HOST, PORT, FAVICON, STATIC_PATH } = process.env;
 
 // BASE //
 const base = {
@@ -47,7 +47,8 @@ const app = {
 
 // SERVER //
 const server = base.isClient ? {} : {
-  port: PORT || 3000,
+  port: parseInt(PORT) || 3000,
+  host: HOST || "localhost",
   faviconPath: FAVICON || path.join(__dirname, "..", "static", "img", "favicon.ico"),
   staticPath: STATIC_PATH || path.join(__dirname, "..", "static")
 };

@@ -13,7 +13,7 @@ function server(webpackResult){
   const app = new Koa();
 
   // MIDDLEWARE //
-  app.use(helmet());              // Set security headers
+  //app.use(helmet());              // Set security headers
   app.use(favicon(faviconPath));  // Serve favicon
   app.use(serve(staticPath));     // Serve static assets
 

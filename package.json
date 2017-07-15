@@ -5,8 +5,11 @@
   "description": "My personal web project boilerplate",
   "main": "./bin/entry.js",
   "scripts": {
-    "build": "webpack --config ./src/webpack/webpack.config.js",
-    "dev": "cross-env NODE_ENV=development node ./bin/entry.js"
+    "server:prep": "universal-webpack --settings ./src/webpack/universal-webpack-settings.json prepare",
+    "dev": "npm-run-all server:prep --parallel dev:*",
+    "dev:wds": "webpack-dev-server --config './src/webpack/webpack.config.client.dev.babels.js' --colors",
+    "dev:watch": "nodemon './bin' --watch './static/dist'",
+    "dev:webpack": "webpack --progress --watch --config './src/webpack/webpack.config.server.dev.js' --colors --display-error-details"
   },
   "repository": {
     "type": "git",
@@ -29,6 +32,7 @@
     "dotenv": "^4.0.0",
     "extract-text-webpack-plugin": "^3.0.0",
     "nodemon": "^1.11.0",
+    "npm-run-all": "^4.0.2",
     "universal-webpack": "^0.3.11",
     "webpack": "^3.2.0",
     "webpack-dev-server": "^2.5.1"

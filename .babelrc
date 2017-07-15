@@ -7,5 +7,9 @@
         "node": "current"
       }
     }]
-  ]
+  ],
+  "env": {
+    "development": {},
+    "production": {}
+  }
 }

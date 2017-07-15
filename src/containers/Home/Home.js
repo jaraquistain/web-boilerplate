@@ -33,3 +33,4 @@ const Connected = withRouter(connect(mapStateToProps, mapDispatchToProps)(Home))
 // EXPORTS //
 export const Unconnected = Home;
 export default Connected
+

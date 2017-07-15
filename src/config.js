@@ -19,8 +19,8 @@ const env = {
       isDevelopment: true,
     },
     "production": {
-      isProduction: false,
-      isDevelopment: true,
+      isProduction: true,
+      isDevelopment: false,
     }
   }[base.env] || {};
 

@@ -1,5 +1,5 @@
 require('source-map-support/register');
-require('babel-register')({ ignore: /\/(static|node_modules)\// });
+require('babel-register')({ ignore: /\/(static|node_modules|bin)\// });
 
 const startServer = require("universal-webpack/server");
 

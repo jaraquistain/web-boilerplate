@@ -7,7 +7,7 @@ const startServer = require("universal-webpack/server");
 require("dotenv").config();
 
 // Start the web server with universal-webpack
-const settings = require("./webpack/universal-webpack-settings");
-const configuration = require("./webpack/webpack.config");
+const settings = require("../src/webpack/universal-webpack-settings");
+const configuration = require("../src/webpack/webpack.config.js");
 
 startServer(configuration, settings);

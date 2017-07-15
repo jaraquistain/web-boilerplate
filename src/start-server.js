@@ -3,10 +3,6 @@ require('babel-register')({ ignore: /\/(static|node_modules)\// });
 
 const startServer = require("universal-webpack/server");
 
-// Initialize global constants
-global.__CLIENT__ = false;
-global.__SERVER__ = true;
-
 // Load .env file into process.env
 require("dotenv").config();
 

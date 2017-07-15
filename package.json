@@ -5,11 +5,7 @@
   "description": "My personal web project boilerplate",
   "main": "./bin/entry.js",
   "scripts": {
-    "server:prep": "universal-webpack --settings ./src/webpack/universal-webpack-settings.json prepare",
-    "dev": "npm-run-all server:prep --parallel dev:*",
-    "dev:wds": "webpack-dev-server --config './src/webpack/webpack.config.client.dev.babels.js' --colors",
-    "dev:watch": "nodemon './bin' --watch './static/dist'",
-    "dev:webpack": "webpack --progress --watch --config './src/webpack/webpack.config.server.dev.js' --colors --display-error-details"
+    "server:prep": "universal-webpack --settings ./src/webpack/universal-webpack-settings.json prepare"
   },
   "repository": {
     "type": "git",

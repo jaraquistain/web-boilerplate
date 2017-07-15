@@ -1,13 +1,14 @@
 import webpack from "webpack";
 import { server } from "universal-webpack/config";
-import merge from "lodash.merge";
 
 import settings from './universal-webpack-settings'
 import webpackConfig from './webpack.config'
 
 const serverWebpackConfig = {
+  ...webpackConfig,
   devtool: "source-map",
   plugins: [
+    ...webpackConfig.plugins,
     new webpack.DefinePlugin({
       global: {
         __CLIENT__: false,
@@ -17,7 +18,4 @@ const serverWebpackConfig = {
   ]
 };
 
-export default server(
-  merge(webpackConfig, serverWebpackConfig),
-  settings
-);
+export default server(serverWebpackConfig, settings);

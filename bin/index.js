@@ -6,8 +6,13 @@ const startServer = require("universal-webpack/server");
 // Load .env file into process.env
 require("dotenv").config();
 
-// Start the web server with universal-webpack
+// Load Webpack Config
 const settings = require("../src/webpack/universal-webpack-settings");
-const configuration = require("../src/webpack/webpack.config.js");
+const appConfig = require("../src/config").default;
+const prodWebpackConfig = require("../src/webpack/prod.webpack.config.js");
+const devWebpackConfig = require("../src/webpack/dev.webpack.config.js");
 
-startServer(configuration, settings);
+const myWebpackConfig = appConfig.isDevelopment ? devWebpackConfig : prodWebpackConfig;
+
+// Start the web server with universal-webpack
+startServer(myWebpackConfig, settings);

@@ -2,7 +2,7 @@ import webpack from "webpack";
 import { server } from "universal-webpack/config";
 
 import settings from './universal-webpack-settings'
-import webpackConfig from './webpack.config'
+import webpackConfig from './prod.webpack.config'
 
 const serverWebpackConfig = {
   ...webpackConfig,

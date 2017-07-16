@@ -5,12 +5,17 @@
   "description": "My personal web project boilerplate",
   "main": "",
   "scripts": {
-    "server:prep": "universal-webpack --settings ./src/webpack/universal-webpack-settings.json prepare",
     "start": "npm-run-all prod:build prod:server:start",
     "prod:build": "npm-run-all -p prod:webpack:*",
     "prod:webpack:client": "better-npm-run prod:webpack:client",
     "prod:webpack:server": "better-npm-run prod:webpack:server",
-    "prod:server:start": "better-npm-run prod:server:start"
+    "prod:server:start": "better-npm-run prod:server:start",
+    "server:prep": "universal-webpack --settings ./src/webpack/universal-webpack-settings.json prepare",
+    "dev": "npm-run-all server:prep -p dev:build dev:server:start",
+    "dev:build": "npm-run-all -p dev:webpack:*",
+    "dev:webpack:client": "better-npm-run dev:webpack:client",
+    "dev:webpack:server": "better-npm-run dev:webpack:server",
+    "dev:server:start": "better-npm-run dev:server:start"
   },
   "betterScripts": {
     "prod:webpack:client": {
@@ -29,6 +34,24 @@
       "command": "node ./bin",
       "env": {
         "NODE_ENV": "production"
+      }
+    },
+    "dev:webpack:client": {
+      "command": "webpack-dev-server --hot --inline --config ./src/webpack/dev.webpack.config.client.babel.js --colors",
+      "env": {
+        "NODE_ENV": "development"
+      }
+    },
+    "dev:webpack:server": {
+      "command": "webpack --watch --config ./src/webpack/dev.webpack.config.server.babel.js --colors --display-error-details",
+      "env": {
+        "NODE_ENV": "development"
+      }
+    },
+    "dev:server:start": {
+      "command": "nodemon ./bin --watch ./bin/server/compiled",
+      "env": {
+        "NODE_ENV": "development"
       }
     }
   },
@@ -56,7 +79,7 @@
     "nodemon": "^1.11.0",
     "npm-run-all": "^4.0.2",
     "universal-webpack": "^0.3.11",
-    "webpack": "^3.2.0",
+    "webpack": "^3.3.0",
     "webpack-dev-server": "^2.5.1"
   },
   "dependencies": {
@@ -71,7 +94,7 @@
     "react-helmet": "^5.1.3",
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.1",
-    "redux": "^3.7.1",
-    "serialize-javascript": "^1.3.0"
+    "redux": "^3.7.2",
+    "serialize-javascript": "^1.4.0"
   }
 }

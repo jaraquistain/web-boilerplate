@@ -11,7 +11,7 @@ module.exports = {
     filename: "[name]-[hash].js",
     chunkFilename: "[name]-[chunkhash].js",
     path: assetPath,
-    publicPath: "/dist/", //publicPath
+    publicPath: publicPath
   },
   module: {
     rules: [
@@ -32,5 +32,10 @@ module.exports = {
       }
     ]
   },
-  plugins: []
+  plugins: [],
+  devServer: {
+    contentBase: path.join(__dirname, "static"),
+    compress: true,
+    port: WDSPort
+  }
 };

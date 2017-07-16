@@ -19,7 +19,7 @@ class Home extends Component {
     return (
       <section className="ja-page home">
         <Helmet title="Welcome!" />
-        <h1>Home 2</h1>
+        <h1>Home</h1>
       </section>
     );
   }

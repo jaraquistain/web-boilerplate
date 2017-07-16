@@ -49,7 +49,7 @@
       }
     },
     "dev:server:start": {
-      "command": "nodemon ./bin --watch ./bin/server/compiled",
+      "command": "nodemon ./bin --watch ./bin/server",
       "env": {
         "NODE_ENV": "development"
       }

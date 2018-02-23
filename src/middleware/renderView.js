@@ -5,7 +5,7 @@ import { parse as parseUrl } from 'url'
 
 import { Html, RootServer } from "../components";
 import routes from "../routes";
-
+import * as helpers from "../redux/connectHelpers";
 import createStore from "../redux/createStore";
 
 /**
@@ -29,7 +29,6 @@ export default (assets) => {
   return async ctx => {
     const store = createStore();
     const location = parseUrl(ctx.originalUrl || ctx.url);
-    const helpers = {}; //TODO: This is where you'd put your async helpers E.G. API client
 
     loadOnServer({ store, location, routes, helpers }).then(() => {
       // This initially empty object can be mutated during view render by react-router

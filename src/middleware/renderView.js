@@ -10,16 +10,12 @@ import createStore from "../redux/createStore";
 
 /**
  * Render the appropriate HTML for the initial page load of a view request
- * @param store The populated redux store
- * @param component The root React component for the app
- * @param assets scripts and stylesheets emitted by Webpack
+ * @param root The root React root Component for the app
  * @returns {string} The html to be rendered in the browser
  */
-function generateViewResponseString(store, component, assets) {
+function getPageString(root) {
   const doctype = "<!doctype html>";
-  const document = ReactDOMServer.renderToString(
-    <Html store={store} component={component} assets={assets} />
-  );
+  const document = ReactDOMServer.renderToString(root);
 
   return `${doctype}\n${document}`;
 }
@@ -33,12 +29,23 @@ export default (assets) => {
   return async ctx => {
     const store = createStore();
     const location = parseUrl(ctx.originalUrl || ctx.url);
+    const helpers = {}; //TODO: This is where you'd put your async helpers E.G. API client
 
-    loadOnServer({ store, location, routes }).then(() => {
+    loadOnServer({ store, location, routes, helpers }).then(() => {
+      // This initially empty object can be mutated during view render by react-router
       const context = {};
-      const component = <RootServer context={context} location={location} routes={routes} store={store} />;
 
-      ctx.body = generateViewResponseString(store, component, assets);
+      const view = <RootServer context={context} location={location} routes={routes} store={store} helpers={helpers}/>;
+      const root = <Html store={store} view={view} assets={assets} />;
+
+      // The view is rendered prior to setting the body so it can populate the context if need be
+      const pageString = getPageString(root);
+
+      // // Catch route-defined redirects
+      // context.url && ctx.redirect(context.url);
+
+      // Return the rendered view
+      ctx.body = pageString;
     });
   }
 }

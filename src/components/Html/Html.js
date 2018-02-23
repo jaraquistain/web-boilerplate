@@ -11,8 +11,8 @@ import Helmet from "react-helmet";
 // UTILS //
 
 // COMPONENT //
-const Html = ({ store, component, assets: { javascript: scripts } }) => {
-  const content = { __html: ReactDOMServer.renderToString(component) };
+const Html = ({ store, view, assets: { javascript: scripts } }) => {
+  const content = { __html: ReactDOMServer.renderToString(view) };
   const state = { __html: `window._appState=${serialize(store.getState())};` };
   const head = Helmet.rewind();
 
@@ -45,7 +45,7 @@ Html.propTypes = {
       main: PropTypes.string.isRequired
     })
   }),
-  component: PropTypes.node
+  view: PropTypes.node.isRequired
 };
 
 // EXPORT

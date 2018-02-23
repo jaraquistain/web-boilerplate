@@ -1,5 +1,4 @@
 import path from "path";
-import merge from "lodash.merge";
 
 const DEFAULT_ENV = "development";
 const { NODE_ENV, HOST, PORT, FAVICON, STATIC_PATH } = process.env;
@@ -7,9 +6,9 @@ const { NODE_ENV, HOST, PORT, FAVICON, STATIC_PATH } = process.env;
 // BASE //
 const base = {
   env: NODE_ENV || DEFAULT_ENV,
-  isClient: global.__CLIENT__,
-  isServer: global.__SERVER__,
-  name: "Site Name"
+  isClient: typeof window !== 'undefined',
+  isServer: !(typeof window !== 'undefined'),
+  name: "Site Name" //TODO: Add site name when necessary
 };
 
 // ENV //
@@ -49,12 +48,13 @@ const app = {
 const server = base.isClient ? {} : {
   port: parseInt(PORT) || 3000,
   host: HOST || "localhost",
-  faviconPath: FAVICON || path.join(__dirname, "..", "static", "img", "favicon.ico"),
+  faviconPath: FAVICON || path.join(__dirname, "static", "img", "favicon.ico"),
   staticPath: STATIC_PATH || path.join(__dirname, "..", "static")
 };
 
 export default {
-  ...merge(base, env),
+  ...base,
+  ...env,
   app,
   server
 }

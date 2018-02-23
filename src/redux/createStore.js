@@ -4,16 +4,11 @@ import config from "../config";
 import reducer from "./reducer";
 
 export default (data = {}) => {
-  const middleware = applyMiddleware(/** middleware goes here **/);
-  const hasDevTools = config.isClient && window.__REDUX_DEVTOOLS_EXTENSION__;
+  const devTools = config.isClient && window.__REDUX_DEVTOOLS_EXTENSION__();
+  const baseMiddleware = applyMiddleware(); //TODO: Add middleware when necesasry E.G. Thunk
+  const middleware = !!devTools ? compose(baseMiddleware, devTools) : baseMiddleware;
 
-  // By default just use middleware
-  let enhancers = middleware;
-
-  // But if dev tools exist also include that
-  if (hasDevTools) {
-      enhancers = compose(middleware, window.__REDUX_DEVTOOLS_EXTENSION__())
-  }
-
-  return createStore(reducer, data, enhancers);
+  return createStore(reducer, data, middleware);
 }
+
+

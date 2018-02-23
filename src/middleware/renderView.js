@@ -1,8 +1,10 @@
 import ReactDOMServer from "react-dom/server"
 import React from "react";
+import { loadOnServer } from "redux-connect";
+import { parse as parseUrl } from 'url'
 
-import { getRootComponent } from "../helpers";
-import { Html } from "../components";
+import { Html, RootServer } from "../components";
+import routes from "../routes";
 
 import createStore from "../redux/createStore";
 
@@ -28,11 +30,15 @@ function generateViewResponseString(store, component, assets) {
  * @returns {function} Koa middleware for rendering a page in the app
  */
 export default (assets) => {
-  return (ctx) => {
-    const routerContext = {};
+  return async ctx => {
     const store = createStore();
-    const component = getRootComponent.server(ctx, routerContext, store);
+    const location = parseUrl(ctx.originalUrl || ctx.url);
 
-    ctx.body = generateViewResponseString(store, component, assets);
+    loadOnServer({ store, location, routes }).then(() => {
+      const context = {};
+      const component = <RootServer context={context} location={location} routes={routes} store={store} />;
+
+      ctx.body = generateViewResponseString(store, component, assets);
+    });
   }
 }

@@ -6,10 +6,11 @@ import { Link } from "react-router-dom";
 // UTILS //
 
 // COMPONENT //
-const Nav = (props) => (
+const Nav = () => (
   <nav>
     <Link to="/">Home</Link>{' '}
-    <Link to="/a">Not Found</Link><br />
+    <Link to="/test">Test</Link>{' '}
+    <Link to="/asdf">Not Found</Link><br />
   </nav>
 );
 

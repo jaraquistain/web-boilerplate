@@ -1,6 +1,6 @@
 // IMPORTS //
 // External
-import React, { Component } from "react";
+import React from "react";
 import ReactDOMServer from "react-dom/server";
 import PropTypes from "prop-types";
 import serialize from "serialize-javascript";
@@ -41,7 +41,9 @@ const Html = ({ store, component, assets: { javascript: scripts } }) => {
 Html.propTypes = {
   store: PropTypes.object.isRequired,
   assets: PropTypes.shape({
-    javascript: PropTypes.object.isRequired
+    javascript: PropTypes.shape({
+      main: PropTypes.string.isRequired
+    })
   }),
   component: PropTypes.node
 };

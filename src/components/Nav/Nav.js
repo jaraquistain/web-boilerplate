@@ -10,7 +10,8 @@ const Nav = () => (
   <nav>
     <Link to="/">Home</Link>{' '}
     <Link to="/test">Test</Link>{' '}
-    <Link to="/asdf">Not Found</Link><br />
+    <Link to="/asdf">Not Found</Link>{' '}
+    <Link to="/redirect">Redirect</Link>{' '}
   </nav>
 );
 

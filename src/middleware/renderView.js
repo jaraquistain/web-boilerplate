@@ -41,8 +41,8 @@ export default (assets) => {
       // The view is rendered prior to setting the body so it can populate the context if need be
       const pageString = getPageString(root);
 
-      // // Catch route-defined redirects
-      // context.url && ctx.redirect(context.url);
+      // Catch route-defined redirects
+      context.url && ctx.redirect(context.url);
 
       // Return the rendered view
       ctx.body = pageString;

@@ -1,23 +1,29 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 
-import { Home, Test, NotFound } from "./containers";
-import { getViewComponent } from "./containers/App/App";
+import { Home, Test, App, NotFound } from "./containers";
 
 export default [
   {
     path: "/",
-    exact: true,
-    component: getViewComponent(Home)
-  },
-  {
-    path: "/test",
-    component: getViewComponent(Test)
-  },
-  {
-    path: "/bad",
-    component: getViewComponent()
-  },
-  {
-    component: NotFound
+    component: App,
+    routes: [
+      {
+        path: "/",
+        exact: true,
+        component: Home
+      },
+      {
+        path: "/test",
+        component: Test
+      },
+      {
+        path: "/redirect",
+        component: () => <Redirect to="/lksdjf" />
+      },
+      {
+        component: NotFound
+      }
+    ]
   }
 ];

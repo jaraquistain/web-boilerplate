@@ -3,6 +3,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom"
+import renderRoutes from "react-router-config/renderRoutes";
 import Helmet from "react-helmet";
 
 // Internal
@@ -18,14 +19,14 @@ class App extends Component {
 
   // RENDER //
   render() {
-    const { view: View, location: { pathname } } = this.props;
+    const { route } = this.props;
 
     return (
-      <section className="app">
+      <div className="app">
         <Helmet {...config.app.head} />
         <Nav />
-        {View ? <View /> : <div>No view element provided in route config for {pathname}</div>}
-      </section>
+        {renderRoutes(route.routes)}
+      </div>
     );
   }
 }
@@ -38,5 +39,3 @@ const Connected = withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
 // EXPORTS //
 export const Unconnected = App;
 export default Connected;
-
-export const getViewComponent = (view) => () => <Connected view={view} />;
